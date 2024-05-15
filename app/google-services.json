@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "952540062642",
+    "project_id": "recordbook-f7dae",
+    "storage_bucket": "recordbook-f7dae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952540062642:android:4d014c88ddd2c9d7917aab",
+        "android_client_info": {
+          "package_name": "com.example.recordbook"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdhipKT_xee_OKVCRvvg_uo1XS7AYWCRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

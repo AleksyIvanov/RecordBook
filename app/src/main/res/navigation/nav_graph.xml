@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.recordbook.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_listSubjectFragment"
+            app:destination="@id/listSubjectFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_listStudentFragment"
+            app:destination="@id/listStudentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listStudentFragment"
+        android:name="com.example.recordbook.fragments.ListStudentFragment"
+        android:label="fragment_list_student"
+        tools:layout="@layout/fragment_list_student" >
+        <action
+            android:id="@+id/action_listStudentFragment_to_addStudentFragment"
+            app:destination="@id/addStudentFragment" />
+        <action
+            android:id="@+id/action_listStudentFragment_to_listSubjectFragment"
+            app:destination="@id/listSubjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStudentFragment"
+        android:name="com.example.recordbook.fragments.AddStudentFragment"
+        android:label="fragment_add_student"
+        tools:layout="@layout/fragment_add_student" />
+    <fragment
+        android:id="@+id/addSubjectFragment"
+        android:name="com.example.recordbook.fragments.AddSubjectFragment"
+        android:label="fragment_add_subject"
+        tools:layout="@layout/fragment_add_subject" >
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+    <fragment
+        android:id="@+id/listSubjectFragment"
+        android:name="com.example.recordbook.fragments.ListSubjectFragment"
+        android:label="fragment_list_subject"
+        tools:layout="@layout/fragment_list_subject" >
+        <action
+            android:id="@+id/action_listSubjectFragment_to_addSubjectFragment"
+            app:destination="@id/addSubjectFragment" />
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+</navigation>

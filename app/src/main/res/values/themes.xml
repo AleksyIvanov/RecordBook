@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.RecordBook" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="foreground">@color/black</item>
+    </style>
+
+    <style name="Theme.RecordBook" parent="Base.Theme.RecordBook" />
+</resources>
