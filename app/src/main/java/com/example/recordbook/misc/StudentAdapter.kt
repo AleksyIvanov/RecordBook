@@ -24,7 +24,7 @@ class StudentDiffCallback : DiffUtil.ItemCallback<Student>(){
 class StudentViewHolder(private val binding: ItemStudentBinding)
     : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(student: Student, listener: StudentAdapter.Listener) {
+    fun bind(student: Student, listener: StudentAdapter.Listener, isTeacher:Boolean) {
         binding.apply {
             textViewStudentName.text = student.name
             var count = 0
@@ -43,20 +43,21 @@ class StudentViewHolder(private val binding: ItemStudentBinding)
                 listener.remove(student)
             }
 
+
             root.setOnClickListener {
-                it.findNavController().navigate(R.id.action_listStudentFragment_to_listSubjectFragment, ListSubjectFragment.setId(student.id))
+                it.findNavController().navigate(R.id.action_listStudentFragment_to_listSubjectFragment, ListSubjectFragment.setBundle(student.id,isTeacher))
             }
         }
     }
 }
 
-class StudentAdapter(private val listener: Listener): ListAdapter<Student, StudentViewHolder>(StudentDiffCallback()) {
+class StudentAdapter(private val listener: Listener, private val isTeacher:Boolean): ListAdapter<Student, StudentViewHolder>(StudentDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         val binding = ItemStudentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return StudentViewHolder(binding)
     }
     override fun onBindViewHolder(holder: StudentViewHolder, position:Int){
-        holder.bind(getItem(position),listener)
+        holder.bind(getItem(position),listener,isTeacher)
     }
     interface Listener{
         fun remove(student: Student)

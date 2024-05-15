@@ -19,6 +19,9 @@ class ListSubjectFragment : Fragment() {
     private val viewModel: RepositoryViewModal by activityViewModels()
     private val idStudent:Long
         get() = requireArguments().getLong("id")
+    private val isTeacher:Boolean
+        get() = requireArguments().getBoolean("isTeacher")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,21 +32,34 @@ class ListSubjectFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //isTeacher = viewModel.data.value?.first{it.id == idStudent}?.teacher == true
         with(binding)
         {
             val adapter = SubjectAdapter(object :SubjectAdapter.Listener{
                 override fun remove(subject: Subject) {
                     viewModel.removeSubject(subject.id, idStudent)
                 }
-            })
+
+                override fun setRating(subject: Subject, rating: Int) {
+                    viewModel.setRating(subject.id,idStudent,rating)
+                }
+            }, isTeacher)
+
+            if (isTeacher)
+                buttonAdd.visibility = View.VISIBLE
+            else
+                buttonAdd.visibility = View.INVISIBLE
+
 
             recyclerVew.adapter = adapter
 
             viewModel.data.observe(viewLifecycleOwner){list->
-                adapter.submitList(list.first{it.id == idStudent}.subjects)
+                adapter.submitList(list.first{it.id == idStudent }.subjects)
             }
-
-            textViewStudentName.text = if(idStudent!=0L) viewModel.data.value?.find { it.id == idStudent }?.name else "ГЛАВА МИРА"
+            buttonBack.setOnClickListener {
+                it.findNavController().popBackStack()
+            }
+            textViewStudentName.text = viewModel.data.value?.find { it.id == idStudent }?.name
             buttonAdd.setOnClickListener {
                 it.findNavController().navigate(R.id.action_listSubjectFragment_to_addSubjectFragment, AddSubjectFragment.setId(idStudent))
             }
@@ -52,9 +68,9 @@ class ListSubjectFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun setId(id: Long):Bundle
+        fun setBundle(id: Long,isTeacher: Boolean):Bundle
         {
-            return bundleOf("id" to id)
+            return bundleOf("id" to id,"isTeacher" to isTeacher )
         }
 
     }

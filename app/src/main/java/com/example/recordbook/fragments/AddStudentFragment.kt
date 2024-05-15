@@ -26,7 +26,7 @@ class AddStudentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding){
             buttonConfirm.setOnClickListener {
-                viewModel.addStudent(editTextName.text.toString(),"123123")
+                viewModel.addStudent(editTextName.text.toString(),editTextPassword.text.toString())
                 it.findNavController().popBackStack()
             }
         }
